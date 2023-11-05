@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
     faCircleXmark,
-    faCloudUpload,
     faCoins,
     faEarthAsia,
     faEllipsisVertical,
@@ -25,6 +24,8 @@ import styles from './Header.module.scss';
 import images from '~/assets/images';
 import AccountItem from '~/components/AccoundItem';
 import Menu from '~/components/Popper/Menu';
+import { InboxIcon, MessagesIcon, UploadIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const cx = classNames.bind(styles);
 
@@ -140,9 +141,20 @@ function Header() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 200]} content="Upload Video" placement="bottom">
+                            <Tippy delay={[0, 100]} content="Upload Video" placement="bottom">
                                 <button className={cx('actions-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 100]} content="Messages" placement="bottom">
+                                <button className={cx('actions-btn')}>
+                                    <MessagesIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 100]} content="Inbox" placement="bottom">
+                                <button className={cx('actions-btn')}>
+                                    <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
@@ -155,10 +167,11 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
-                                src="https://p9-sign-sg.tiktokcdn.com/aweme/100x100/tiktok-obj/1637511740316674.jpeg?x-expires=1699279200&x-signature=20FmIxhFSb7Posmzh%2FnORUIW0M4%3D"
+                            <Image
+                                src="ttps://p9-sign-sg.tiktokcdn.com/aweme/100x100/tiktok-obj/1637511740316674.jpeg?x-expires=1699279200&x-signature=20FmIxhFSb7Posmzh%2FnORUIW0M4%3D"
                                 className={cx('user-avatar')}
                                 alt="Nguyen Van A"
+                                fallback="https://lh3.googleusercontent.com/a/ACg8ocJLer4HZfc9c23PAhVoZBwXms-JHj5xacfLY2Pag60q6yM=s360-c-no"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
