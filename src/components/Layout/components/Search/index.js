@@ -4,6 +4,7 @@ import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 
+import * as searchServices from '~/apiServices/searchServices';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccoundItem';
 import styles from './Search.module.scss';
@@ -28,18 +29,16 @@ function Search() {
             return;
         }
 
-        setLoading(true);
+        const fetchAPI = async () => {
+            setLoading(true);
+            
+            const result = await searchServices.search(debounce);
+            setSearchResult(result);
 
-        // encodeURIComponent: mã hóa sang 1 định dạng khác cho URL
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+            setLoading(false);
+        }
+
+        fetchAPI();
     }, [debounce]);
 
     const handleClear = () => {
