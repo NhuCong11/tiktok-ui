@@ -4,7 +4,7 @@ import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 
-import * as searchServices from '~/apiServices/searchServices';
+import * as searchServices from '~/services/searchService';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccoundItem';
 import styles from './Search.module.scss';
@@ -60,7 +60,7 @@ function Search() {
     };
 
     return (
-        // Using a wrapper <div> tag around the reference element solves 
+        // Using a wrapper <div> tag around the reference element solves
         // this by creating a new parentNode context.
         <div>
             <HeadlessTippy
@@ -93,7 +93,7 @@ function Search() {
                         </button>
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-    
+
                     <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
                         <SearchIcon />
                     </button>
